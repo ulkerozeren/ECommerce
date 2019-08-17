@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] - Test1</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="~/js/ECommerce.js"></script>
+</head>
+<body>
+    <h1>Siteme geldiniz!</h1>
+    @RenderBody()
+    <a href="@Url.Action("Contact", "Home")"> <h3>İletişim için tıklayın</h3></a>
+   
+</body>
+</html>

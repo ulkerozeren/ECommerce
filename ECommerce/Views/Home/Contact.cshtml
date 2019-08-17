@@ -1,0 +1,22 @@
+﻿@model Contact
+<p>
+    <a href="@Url.Action("Index", "Home")">Anasayfa</a>
+</p>
+
+
+<form>
+    <input type="text" id="Name" />
+    <input type="text" id="Surname" />
+    <input type="text" id="Message" />
+    <input type="button" value="Kaydet" onclick="ECommerce.Page.Contact.Save();" />
+</form>
+
+<div id="Holder-Products">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+    });
+</script>
