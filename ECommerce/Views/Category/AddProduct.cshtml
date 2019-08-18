@@ -1,0 +1,17 @@
+﻿@model Int32
+
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h2>AddProduct</h2>
+
+<div id="saveProduct" style="padding-top:50px">
+    <form>
+        <input type="hidden" id="CategoryId" value="@Model" />
+        <input type="text" id="ProductName" placeholder="Ürün Adı" />
+        <input type="text" id="ProductDescription" placeholder="Ürün Açıklaması" />
+        <input type="button" class="btn btn-primary" value="Kaydet" onclick="ECommerce.Page.Category.Save();" />
+    </form>
+
+</div>

@@ -1,5 +1,6 @@
 ﻿using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace ECommerce
 {
@@ -13,7 +14,9 @@ namespace ECommerce
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             //DB BAĞLANTISI VB DATABASE INSTANCE'INI İLGİLENDİREN İNCE AYARLAR
-            dbContextOptionsBuilder.UseSqlServer("Server=127.0.0.1;Database=ECommerce;User Id=sa;Password=123;");
+            
+            dbContextOptionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=ECommerce;Integrated Security=True");
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

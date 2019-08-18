@@ -35,15 +35,37 @@ namespace ECommerce.Controllers
             {
                 AjaxMethod.SaveContact(ajaxRequest.Json);
             }
+            else if (ajaxRequest.Method == "UpdateProduct")
+            {
+                AjaxMethod.UpdateProduct(ajaxRequest.Json);
+            }
+
             return new JsonResult(ajaxResponse);
         }
     }
 
-
-    
-
     public class AjaxMethod
     {
+        public void UpdateProduct(string json)
+        {
+
+            DTO.ProductUpdateDto productUpdate = Newtonsoft.Json.JsonConvert.DeserializeObject<DTO.ProductUpdateDto>(json);
+
+            using (ECommerceContext eCommerceContext = new ECommerceContext())
+            {
+                Models.Product product = eCommerceContext.Products.SingleOrDefault(a => a.Id == productUpdate.Id);
+
+                product.Name = productUpdate.ProductName;
+                product.Description = productUpdate.ProductDescription;
+
+                if (product != null)
+                {
+                    eCommerceContext.Products.Update(product);
+                    eCommerceContext.SaveChanges();
+                   
+                }
+            }
+        }
         public void SaveContact(string json)
         {
             DTO.ContactSaveDto contactSave = Newtonsoft.Json.JsonConvert.DeserializeObject<DTO.ContactSaveDto>(json);
@@ -54,27 +76,31 @@ namespace ECommerce.Controllers
                 {
                     Name = contactSave.Name,
                     Surname = contactSave.Surname,
-                    Message = contactSave.Message,
+                    Message = contactSave.Message
+
                 });
 
                 eCommerceContext.SaveChanges();
             }
         }
 
+
         public bool RemoveProduct(string json)
         {
             bool result = false;
 
+            DTO.ProductRemoveDto productRemove = Newtonsoft.Json.JsonConvert.DeserializeObject<DTO.ProductRemoveDto>(json);
+
             using (ECommerceContext eCommerceContext = new ECommerceContext())
             {
-                DTO.ProductRemoveDto productRemove = Newtonsoft.Json.JsonConvert.DeserializeObject<DTO.ProductRemoveDto>(json);
-                Models.Product product = eCommerceContext.Products.SingleOrDefault(x=>x.Id==productRemove.ProductId);
-                if (product!=null)
+                Models.Product product = eCommerceContext.Products.SingleOrDefault(a => a.Id == productRemove.ProductId);
+
+                if (product != null)
                 {
                     eCommerceContext.Products.Remove(product);
                     eCommerceContext.SaveChanges();
                     result = true;
-                }            
+                }
             }
 
             return result;

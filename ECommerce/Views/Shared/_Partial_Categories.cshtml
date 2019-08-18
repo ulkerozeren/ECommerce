@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     List<Category> categories = new List<Category>();
 
     using (ECommerceContext eCommerceContext = new ECommerceContext())
@@ -6,11 +6,12 @@
         categories = eCommerceContext.Categories.ToList();
     }
 }
-<p>
-    @{
-        foreach (Category category in categories)
+<div class="nav nav-sidebar" style="float: left; margin-left:-15px; margin-top:55px">
+
+    <div class="list-group">
+        @foreach (Category category in categories)
         {
-            <span><a href="@Url.Action("Index", "Category", new { id = category.Id })">@category.Name</a></span> <text>|</text>
+            <a href="@Url.Action("Index", "Category", new { id = category.Id })" class="list-group-item">@category.Name</a>
         }
-    }
-</p>
+        </div>
+    </div>

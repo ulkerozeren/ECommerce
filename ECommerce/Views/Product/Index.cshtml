@@ -1,0 +1,26 @@
+﻿@model Product;
+
+<div class="table-responsive" style="padding-top:50px">
+    <table class="table table-striped">
+       
+            <thead>
+                <tr>
+                    <th><strong>Ürün Adı:</strong></th>
+                    <th><strong>Ürün Açıklaması:</strong></th>
+                </tr>
+
+            </thead>
+            <tr>
+                <td>@Model.Name</td>
+                <td>@Model.Description</td>
+            </tr>
+        </table>
+    </div>
+        <a href="@Url.Action("Update","Product")" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Güncelle
+        </a>
+
+
+
+

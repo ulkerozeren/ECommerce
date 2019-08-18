@@ -1,26 +1,92 @@
-﻿@model Category
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    var categoryId = ViewData["CategoryId"];
+}
 
-@{await Html.RenderPartialAsync("_Partial_Categories");}
+<div style="padding-top:17px">
+    <h1 class="page-header">
 
-<p>
-    <a href="@Url.Action("Index", "Home")">Anasayfa</a>
-</p>
-<h2>@Model.Name</h2>
-<p>@Model.Description</p>
+       Ürün Listesi
 
-<form>
-    <input type="hidden" id="CategoryId" value="@Model.Id" />
-    <input type="text" id="ProductName" />
-    <input type="text" id="ProductDescription" />
-    <input type="button" value="Kaydet" onclick="ECommerce.Page.Category.Save();" />
-</form>
+        @*<input type="button" class="btn btn-success" value="Yeni Ürün Ekle" onclick="myFunction();" />*@
+    </h1>
 
+    <div class="actions">
+        <a href="@Url.Action("AddProduct","Category", new { categoryId =categoryId})" class="btn btn-success">
+            <i class="fa fa-plus"></i>
+            Yeni Ürün Ekle
+        </a>
+    </div>
+</div>
+<input type="hidden" id="CategoryId" value="categoryId" />
 <div id="Holder-Products">
 
 </div>
 
-<script>
-    $(document).ready(function() {
-        ECommerce.Page.Category.List();
-    });
+
+<div class="col-sm-9 col-md-10 main">
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th><strong>Ürün Adı</strong></th>
+                <th><strong>Ürün Açıklaması</strong></th>
+                <th></th>
+            </tr>
+
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td><a href="@Url.Action("Index", "Product", new { id = item.Id })">@item.Name </a></td>
+                    <td>@item.Description</td>
+
+                    <td>
+                        <a href="@Url.Action("Delete","Product", new {id= item.Id})" class="btn  btn-danger">
+                            <i class="fa fa-trash"></i>
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    </div>
+
+    @*<div class="col-sm-9 col-md-10 main">
+            <div class="row placeholders" id="Holder-Products">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img src="~/images/icons8-product-50.png" class="img-responsive" width="200" height="200" alt="">
+                    <a href="@Url.Action("Index","Product", new { id =item.Id})">
+                        @item.Name
+                    </a> <br />
+                    @item.Description
+                </div>
+            </div>
+        </div>*@
+    }
+
+<script>    
+    function DeleteItem() {
+
+    }
 </script>
+
+    @*<script>
+            $(document).ready(function () {
+                ECommerce.Page.Category.List();
+            });
+        </script>*@
+
+    @*<script>
+            function myFunction() {
+                var x = document.getElementById("saveProduct");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>*@

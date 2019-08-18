@@ -1,9 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using ECommerce.Models;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Controllers
 {
@@ -21,12 +16,9 @@ namespace ECommerce.Controllers
             return View();
         }
 
-
-
-        public IActionResult Contact(string json)
+        public IActionResult Contact()
         {
-            ViewData["Title"] = "İletisim!";
-            
+            ViewData["Title"] = "İletişim!";
             return View();
         }
     }

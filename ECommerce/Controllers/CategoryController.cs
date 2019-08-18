@@ -1,5 +1,6 @@
 ﻿using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ECommerce.Controllers
@@ -16,9 +17,23 @@ namespace ECommerce.Controllers
                 category = eCommerceContext.Categories.SingleOrDefault(a => a.Id == id);
             }
 
-            ViewData["Title"] = category.Name;
+            List<Product> products = new List<Product>();
 
-            return View(category);
+            using (ECommerceContext eCommerceContext = new ECommerceContext())
+            {
+                products = eCommerceContext.Products.Where(x => x.CategoryId == id).ToList();
+            }
+
+            ViewData["Title"] = category.Name;
+            ViewData["CategoryId"] = category.Id;
+            return View(products);
+        }
+
+
+        public IActionResult AddProduct(int categoryId)
+        {
+
+            return View(categoryId);
         }
     }
 }
