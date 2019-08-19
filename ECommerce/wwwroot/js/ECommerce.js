@@ -45,20 +45,25 @@
                 jDto.ProductId = productId;
                 ECommerce.Helper.Ajax("RemoveProduct", jDto, ECommerce.Page.Category.Callback_Remove);
             },
-            Callback_Remove: function(data) {
+            Callback_Remove: function (data) {
+                
                 ECommerce.Page.Category.List();
+                alert("Ürün başarılı şekilde silindi.");
             },
-            Callback_Save: function(data) {
+            Callback_Save: function (data) {
+                //alert("Ürün başarılı şekilde kaydedildi.");
                 ECommerce.Page.Category.List();
-                alert("Ürün başarılı şekilde kaydedildi.");
+                
             },
-            List: function() {
+            List: function () {
+              
                 var jDto = new Object();
                 jDto.CategoryId = $("#CategoryId").val();
-              
+               
                 ECommerce.Helper.Ajax("ProductsByCategoryId", jDto, ECommerce.Page.Category.Callback_List);
             },
-            Callback_List: function(data) {
+            Callback_List: function (data) {
+               
                 console.log(data);
                 //var html = "<div class='table-responsive'><table class='table table-striped'><tbody>";
                 var html = "";

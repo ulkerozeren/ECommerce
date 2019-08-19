@@ -1,13 +1,21 @@
-﻿@model List<Product>
+﻿@model X.PagedList.PagedList<Product>
+@using X.PagedList.Mvc.Core
+@*@model PagedList.Core.IPagedList<Product>*@
 @{
     ViewData["Title"] = "Index";
     var categoryId = ViewData["CategoryId"];
 }
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <div style="padding-top:17px">
     <h1 class="page-header">
 
-       Ürün Listesi
+        Ürün Listesi
 
         @*<input type="button" class="btn btn-success" value="Yeni Ürün Ekle" onclick="myFunction();" />*@
     </h1>
@@ -20,73 +28,77 @@
     </div>
 </div>
 <input type="hidden" id="CategoryId" value="categoryId" />
-<div id="Holder-Products">
+<div style="padding-top:50px" id="Holder-Products">
 
 </div>
 
 
 <div class="col-sm-9 col-md-10 main">
-    <table class="table table-striped">
+    <table class="table">
+        <tr>
+            <th><strong>Ürün Adı</strong></th>
+            <th><strong>Ürün Açıklaması</strong></th>
+            <th></th>
+        </tr>
 
-        <thead>
-            <tr>
-                <th><strong>Ürün Adı</strong></th>
-                <th><strong>Ürün Açıklaması</strong></th>
-                <th></th>
-            </tr>
-
-        </thead>
         @foreach (var item in Model)
         {
-            <tbody>
-                <tr>
-                    <td><a href="@Url.Action("Index", "Product", new { id = item.Id })">@item.Name </a></td>
-                    <td>@item.Description</td>
+            <tr>
+                <td><a href="@Url.Action("Index", "Product", new { id = item.Id })">@item.Name </a></td>
+                <td>@item.Description</td>
 
-                    <td>
-                        <a href="@Url.Action("Delete","Product", new {id= item.Id})" class="btn  btn-danger">
-                            <i class="fa fa-trash"></i>
-                            Sil
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
+                <td>
+                    <a href="@Url.Action("Delete","Product", new {id= item.Id})" class="btn  btn-danger">
+                        <i class="fa fa-trash"></i>Sil
+                    </a>
+                </td>
+            </tr>
         }
-    </table>
-    </div>
 
-    @*<div class="col-sm-9 col-md-10 main">
-            <div class="row placeholders" id="Holder-Products">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="~/images/icons8-product-50.png" class="img-responsive" width="200" height="200" alt="">
-                    <a href="@Url.Action("Index","Product", new { id =item.Id})">
-                        @item.Name
-                    </a> <br />
-                    @item.Description
-                </div>
+        <tr>
+            <td colspan="5">                         
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                <pager lis />
+            </td>
+        </tr>
+
+    </table>
+
+
+</div>
+
+@*<div class="col-sm-9 col-md-10 main">
+        <div class="row placeholders" id="Holder-Products">
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <img src="~/images/icons8-product-50.png" class="img-responsive" width="200" height="200" alt="">
+                <a href="@Url.Action("Index","Product", new { id =item.Id})">
+                    @item.Name
+                </a> <br />
+                @item.Description
             </div>
-        </div>*@
+        </div>
+    </div>*@
     }
 
-<script>    
+<script>
     function DeleteItem() {
 
     }
 </script>
 
-    @*<script>
-            $(document).ready(function () {
-                ECommerce.Page.Category.List();
-            });
-        </script>*@
+@*<script>
+        $(document).ready(function () {
+            ECommerce.Page.Category.List();
+        });
+    </script>*@
 
-    @*<script>
-            function myFunction() {
-                var x = document.getElementById("saveProduct");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                } else {
-                    x.style.display = "none";
-                }
+@*<script>
+        function myFunction() {
+            var x = document.getElementById("saveProduct");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
             }
-        </script>*@
+        }
+    </script>*@

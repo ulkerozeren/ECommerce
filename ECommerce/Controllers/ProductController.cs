@@ -22,13 +22,17 @@ namespace ECommerce.Controllers
         public IActionResult Update(int id)
         {
             Models.Product product;
+            int categoryId = 1;
 
             using (ECommerceContext eCommerceContext = new ECommerceContext())
             {
                 product = eCommerceContext.Products.SingleOrDefault(a => a.Id == id);
+                categoryId = product.CategoryId;
             }
 
             return View(product);
+
+           
         }
 
 
